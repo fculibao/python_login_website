@@ -3,9 +3,29 @@
 # Install apache2
 sudo apt update -y
 sudo apt install apache2 -y
+sudo apt install apache2-utils -y
 sudo systemctl start apache2
 sudo systemctl enable apache2
 sudo bash -c 'echo your very first web server > /var/www/html/index.html'
+
+# Installing PHP
+sudo apt install php libapache2-mod-php -y
+sudo systemctl restart apache2 -y
+sudo apt install php-fpm -y
+sudo apt install php-mysql php-gd -y
+
+# Installing MariaDB
+apt -y install mariadb-server
+db_root_password=$6$tGPfAPvg75j1rY9T$hJuyNGzx63XDw03kwa2zBFtITVJ25QS4I8sDxciNjrWIpnXKREE2SCd3EqamaZAMPzdOwGDs5V7.jh43AxOom.
+mysql_secure_installation <<EOF
+y
+$db_root_password
+$db_root_password
+y
+y
+y
+y
+EOF
 
 # Install Docker on Ubuntu from official Repository
 sudo apt update -y 

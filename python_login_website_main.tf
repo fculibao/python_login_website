@@ -83,6 +83,13 @@ resource "aws_security_group" "python_login_website-allow-http-https-traffic" {
       protocol         = "tcp"
       cidr_blocks      = ["0.0.0.0/0"]
   }
+  ingress {
+      description      = "Database access Port"
+      from_port        = 3306
+      to_port          = 3306
+      protocol         = "tcp"
+      cidr_blocks      = ["0.0.0.0/0"]
+  }
   egress {
       from_port        = 0
       to_port          = 0
