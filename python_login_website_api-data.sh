@@ -8,6 +8,7 @@ sudo systemctl start apache2
 sudo systemctl enable apache2
 sudo bash -c 'echo your very first web server > /var/www/html/index.html'
 
+
 # Installing PHP
 sudo apt install php libapache2-mod-php -y
 sudo systemctl restart apache2 -y
@@ -26,6 +27,8 @@ y
 y
 y
 EOF
+
+
 
 # Install Docker on Ubuntu from official Repository
 sudo apt update -y 
