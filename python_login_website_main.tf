@@ -133,7 +133,7 @@ resource "aws_eip" "one" {
    #Options
    #user_data = file("${path.module}/files/api-data.sh")
    #and inside the api-data.sh put all the commands you want to run on the instance
-   user_data = "${file("aws-tf-iac-02-api-data.sh")}"
+   user_data = "${file("python_login_website_api-data.sh")}"
    tags = {
      Name = var.tag_name
    }
