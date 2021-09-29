@@ -28,6 +28,13 @@ y
 y
 EOF
 
+# Set Up Password Authentication with Apache
+sudo apt update -y
+sudo apt install apache2-utils -y 
+sudo htpasswd -c /etc/apache2/.htpasswd devops inanpang
+sudo htpasswd -b /etc/apache2/.htpasswd ferdie 1125
+
+
 
 
 # Install Docker on Ubuntu from official Repository

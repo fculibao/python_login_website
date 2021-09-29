@@ -141,7 +141,28 @@ resource "aws_eip" "one" {
    #user_data = file("${path.module}/files/api-data.sh")
    #and inside the api-data.sh put all the commands you want to run on the instance
    user_data = "${file("python_login_website_api-data.sh")}"
+
+  # Copies webapp folder file to /var/www/html
+   provisioner "file" {
+     source      = "webapp/"
+     destination = "/var/www/html"
+  }
+
+  # Copies default-ssl.conf to /etc/apache2/sites-enabled/
+   provisioner "file" {
+     content     = "apache2/default-ssl.conf"
+     destination = "/etc/apache2/sites-enabled/"
+  }
+
+  # Copies apache2.conf to /etc/apache2/apache2.conf
+   provisioner "file" {
+     source      = "apache2/apache2.conf"
+     destination = "/etc/apache2/apache2.conf"
+  }
+
    tags = {
      Name = var.tag_name
    }
  }
+
+

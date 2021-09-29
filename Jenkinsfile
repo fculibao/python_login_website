@@ -23,21 +23,6 @@ pipeline {
                 echo "Terraform action is --> ${action}"
                 sh ('/usr/local/bin/terraform ${action} --auto-approve')
            }
-        }
-        stage ("Move Config Files") {
-            steps {
-                sh '''
-                    #!/bin/bash
-                    sleep 30
-                    instance=`/usr/local/bin/terraform state show aws_eip.one | grep public_ip | awk 'NR==1{print $3}' | sed 's/"//g' `
-                    #cd /var/lib/jenkins/workspace/python_login_website
-                    scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=accept-new 2> /dev/null -r /var/lib/jenkins/workspace/python_login_website/webapp -i /home/ec2-user/.ssh/myinanpang-keypair01.pem ubuntu@"${instance}":/var/www/htmp
-
-                    #cd /var/lib/jenkins/workspace/python_login_website/apache2/
-                    scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=accept-new 2> /dev/null /var/lib/jenkins/workspace/python_login_website/apache2/* -i /home/ec2-user/.ssh/myinanpang-keypair01.pem ubuntu@"${instance}":/var/www/htmp
-
-                '''
-            }
         }    
     }
 }
