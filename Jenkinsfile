@@ -26,7 +26,7 @@ pipeline {
         }
         stage ("Move Config Files") {
             steps {
-                bash '''
+                sh '''
                     #!/bin/bash
                     instance=(/usr/local/bin/terraform state show aws_eip.one | grep "public_ip" | awk 'NR==1{print $3}' | sed 's/"//g')
                     cd /var/lib/jenkins/workspace/python_login_website
