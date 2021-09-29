@@ -28,10 +28,10 @@ pipeline {
             steps {
                 sh '''
                     cd /var/lib/jenkins/workspace/python_login_website
-                    scp -r webapp -i ~/.ssh/myinanpang-keypair01.pem ec2-user@${aws_instance < /usr/local/bin/terraform state show aws_eip.one | grep "public_ip" | awk 'NR==1{print $3}' | sed 's/"//g'}:/var/www/htmp/
+                    scp -r webapp -i ~/.ssh/myinanpang-keypair01.pem ec2-user@"${aws_instance < /usr/local/bin/terraform state show aws_eip.one | grep "public_ip" | awk 'NR==1{print $3}' | sed 's/"//g'}":/var/www/htmp/
 
                     cd cd /var/lib/jenkins/workspace/python_login_website/apache2/
-                    scp * -i ~/.ssh/myinanpang-keypair01.pem ec2-user@${aws_instance < /usr/local/bin/terraform state show aws_eip.one | grep "public_ip" | awk 'NR==1{print $3}' | sed 's/"//g'}:/var/www/htmp/
+                    scp * -i ~/.ssh/myinanpang-keypair01.pem ec2-user@"${aws_instance < /usr/local/bin/terraform state show aws_eip.one | grep "public_ip" | awk 'NR==1{print $3}' | sed 's/"//g'}":/var/www/htmp/
 
                 '''
             }
