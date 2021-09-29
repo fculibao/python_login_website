@@ -146,18 +146,36 @@ resource "aws_eip" "one" {
    provisioner "file" {
      source      = "webapp/"
      destination = "/var/www/html"
+     connection {
+        type     = "ssh"
+        user     = "ubuntu"
+        password = file(/home/ec2-user/.ssh/myinanpang-keypair01.pem)
+        host     = file("/usr/local/bin/terraform state show aws_eip.one | grep public_ip | awk 'NR==1{print $3}' | sed 's/"//g'")
+     }   
   }
 
   # Copies default-ssl.conf to /etc/apache2/sites-enabled/
    provisioner "file" {
-     content     = "apache2/default-ssl.conf"
+     source      = "apache2/default-ssl.conf"
      destination = "/etc/apache2/sites-enabled/"
+     connection {
+        type     = "ssh"
+        user     = "ubuntu"
+        password = file(/home/ec2-user/.ssh/myinanpang-keypair01.pem)
+        host     = file("/usr/local/bin/terraform state show aws_eip.one | grep public_ip | awk 'NR==1{print $3}' | sed 's/"//g'")
+     }   
   }
 
   # Copies apache2.conf to /etc/apache2/apache2.conf
    provisioner "file" {
      source      = "apache2/apache2.conf"
      destination = "/etc/apache2/apache2.conf"
+     connection {
+        type     = "ssh"
+        user     = "ubuntu"
+        password = file(/home/ec2-user/.ssh/myinanpang-keypair01.pem)
+        host     = file("/usr/local/bin/terraform state show aws_eip.one | grep public_ip | awk 'NR==1{print $3}' | sed 's/"//g'")
+     }   
   }
 
    tags = {
