@@ -32,7 +32,7 @@ pipeline {
                     cd /var/lib/jenkins/workspace/python_login_website
                     scp -r webapp -i ~/.ssh/myinanpang-keypair01.pem ec2-user@"${instance}":/var/www/htmp/
 
-                    cd cd /var/lib/jenkins/workspace/python_login_website/apache2/
+                    cd /var/lib/jenkins/workspace/python_login_website/apache2/
                     scp * -i ~/.ssh/myinanpang-keypair01.pem ec2-user@"${instance}":/var/www/htmp/
 
                 '''
