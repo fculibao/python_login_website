@@ -16,6 +16,7 @@ sudo apt install php-fpm -y
 sudo apt install php-mysql php-gd -y
 
 # Installing MariaDB
+sudo su
 apt -y install mariadb-server
 #db_root_password=secret
 mysql_secure_installation <<EOF
