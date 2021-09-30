@@ -150,7 +150,7 @@ resource "aws_eip" "one" {
         type     = "ssh"
         user     = "ubuntu"
         password = file(/home/ec2-user/.ssh/myinanpang-keypair01.pem)
-        host     = file("/usr/local/bin/terraform state show aws_eip.one | grep public_ip | awk 'NR==1{print $3}' | sed 's/"//g'")
+        host     = ${instance_ips}
      }   
   }
 
@@ -162,7 +162,7 @@ resource "aws_eip" "one" {
         type     = "ssh"
         user     = "ubuntu"
         password = file(/home/ec2-user/.ssh/myinanpang-keypair01.pem)
-        host     = file("/usr/local/bin/terraform state show aws_eip.one | grep public_ip | awk 'NR==1{print $3}' | sed 's/"//g'")
+        host     = ${instance_ips}
      }   
   }
 
@@ -174,8 +174,17 @@ resource "aws_eip" "one" {
         type     = "ssh"
         user     = "ubuntu"
         password = file(/home/ec2-user/.ssh/myinanpang-keypair01.pem)
-        host     = file("/usr/local/bin/terraform state show aws_eip.one | grep public_ip | awk 'NR==1{print $3}' | sed 's/"//g'")
+        host     = ${instance_ips}
      }   
+  }
+
+  output "instance_ips" {
+    value = aws_instance.web.*.public_ip
+  }
+
+  output "password" {
+    sensitive = true
+    value = var.secrete_password  
   }
 
    tags = {
